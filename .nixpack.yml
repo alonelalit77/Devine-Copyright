@@ -1,4 +1,18 @@
-version: '1'
-language: node
-nodejs:
-  version: 16
+# .nixpack.yml
+version: "1"
+
+# Define the language and build settings
+packages:
+  nodejs: "18"
+
+# Specify the start command for the application
+start:
+  command: "npm start"
+
+# Optional: Specify the build command if you have a build step
+# build:
+#   command: "npm run build"
+
+# Optional: Define environment variables
+# env:
+#   NODE_ENV: "production"
