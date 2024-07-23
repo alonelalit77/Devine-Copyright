@@ -2,9 +2,7 @@
 
 from pyrogram import Client
 from config import OWNER_ID
-
-# Initialize the bot client
-DEVINE = Client("sudoers_bot")
+from DEVINE import DEVINE 
 
 # In-memory store for sudoers
 sudoers = set()
