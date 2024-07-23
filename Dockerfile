@@ -1,17 +1,14 @@
-# Use the official Python image from the Docker Hub
 FROM python:3.11-slim
 
-# Set the working directory in the container
+# Set work directory
 WORKDIR /app
 
-# Copy the requirements file into the container
+# Install dependencies
 COPY requirements.txt .
-
-# Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code into the container
+# Copy project files
 COPY . .
 
-# Define the command to run the bot
+# Command to run the application
 CMD ["python", "dev.py"]
