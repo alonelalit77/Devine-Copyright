@@ -1,3 +1,5 @@
+# sudoers.py
+
 from DEVINE import DEVINE
 from pyrogram import filters
 from config import OWNER_ID
