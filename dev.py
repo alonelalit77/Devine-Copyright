@@ -1,3 +1,4 @@
+from pyrogram import Client, filters
 from DEVINE import DEVINE
 import sudoers
 import broadcast
@@ -18,6 +19,9 @@ copyright_keywords = [
 # Track user violations
 user_violations = {}
 
+# Define a list of admin user IDs (replace with actual admin IDs)
+admins = [123456789, 987654321]  # Replace with actual admin user IDs
+
 # Define a function to check for copyrighted material
 def is_copyrighted_message(message_text):
     for keyword in copyright_keywords:
@@ -28,7 +32,10 @@ def is_copyrighted_message(message_text):
 # Define a function to check if the bot has the necessary permissions
 def has_permissions(client, chat_id):
     chat_member = client.get_chat_member(chat_id, client.get_me().id)
-    return chat_member.can_change_info and chat_member.can_delete_messages and chat_member.can_restrict_members and chat_member.can_promote_members
+    return (chat_member.can_change_info and 
+            chat_member.can_delete_messages and 
+            chat_member.can_restrict_members and 
+            chat_member.can_promote_members)
 
 # Define a function to promote a user to admin
 def promote_to_admin(client, chat_id, user_id):
@@ -91,7 +98,7 @@ def check_copyright(client, message):
 
     # Handle potential copyright issues differently for admins
     if is_copyrighted_message(message.text):
-        if message.from_user.id in admins:  # Assuming `admins` is a list or set of admin user IDs
+        if message.from_user.id in admins:
             client.send_message(chat_id, f"⚠️ Warning: The message from {message.from_user.first_name} may contain copyrighted material.")
         else:
             # Delete the message if it's not from an admin
@@ -148,3 +155,6 @@ def demote_user(client, message):
         return
     
     demote_from_admin(client, chat_id, user_id)
+
+# Start the bot
+DEVINE.run()
