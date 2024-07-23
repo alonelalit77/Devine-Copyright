@@ -1,11 +1,24 @@
 {
-  "name": "devine-music",
+  "name": "devine-copyright-bot",
   "version": "1.0.0",
-  "engines": {
-    "node": "16.x"
-  },
+  "description": "A Telegram bot for copyright protection",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devineparadox/Devine-Copyright.git"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "copyright",
+    "protection"
+  ],
+  "author": "devineparadox",
+  "license": "MIT",
   "dependencies": {
+    "node-telegram-bot-api": "^0.52.0"
   }
+}
