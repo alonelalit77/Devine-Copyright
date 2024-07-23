@@ -1,18 +1,12 @@
-# .nixpack.yml
-version: "1"
-
-# Define the language and build settings
-packages:
-  nodejs: "18"
-
-# Specify the start command for the application
-start:
-  command: "npm start"
-
-# Optional: Specify the build command if you have a build step
-# build:
-#   command: "npm run build"
-
-# Optional: Define environment variables
-# env:
-#   NODE_ENV: "production"
+version: "2.1"
+phases:
+  setup:
+    packages:
+      - python3
+      - pip
+  install:
+    commands:
+      - pip install -r requirements.txt
+  deploy:
+    commands:
+      - python dev.py
