@@ -7,11 +7,11 @@ WORKDIR /app
 # Copy the requirements file into the container
 COPY requirements.txt .
 
-# Install the Python dependencies
+# Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the container
 COPY . .
 
-# Command to run the bot
-CMD ["python", "bash start"]
+# Define the command to run the bot
+CMD ["python", "main.py"]
