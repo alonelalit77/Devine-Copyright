@@ -1,8 +1,6 @@
-# sudoers.py
-
-from pyrogram import Client
+from DEVINE import DEVINE
+from pyrogram import filters
 from config import OWNER_ID
-from DEVINE import DEVINE 
 
 # In-memory store for sudoers
 sudoers = set()
@@ -30,20 +28,35 @@ def list_sudoers():
 @DEVINE.on_message(filters.private & filters.command(["addsudo", "delsudo", "sudoers"]))
 def sudo_command(client, message):
     if message.from_user.id not in OWNER_ID:
+        message.reply("You are not authorized to use this command.")
         return
 
     command = message.text.split()[0]
     if command == "/addsudo":
-        user_id = int(message.text.split()[1])
+        if len(message.text.split()) < 2:
+            message.reply("Please provide the user ID to add.")
+            return
+        try:
+            user_id = int(message.text.split()[1])
+        except ValueError:
+            message.reply("Invalid user ID format.")
+            return
         result = add_sudo(user_id)
         message.reply(result)
     elif command == "/delsudo":
-        user_id = int(message.text.split()[1])
+        if len(message.text.split()) < 2:
+            message.reply("Please provide the user ID to remove.")
+            return
+        try:
+            user_id = int(message.text.split()[1])
+        except ValueError:
+            message.reply("Invalid user ID format.")
+            return
         result = remove_sudo(user_id)
         message.reply(result)
     elif command == "/sudoers":
         sudo_list = list_sudoers()
-        message.reply(f"Sudoers list: {', '.join(map(str, sudo_list))}")
-
-# Start the bot
-DEVINE.run()
+        if sudo_list:
+            message.reply(f"Sudoers list: {', '.join(map(str, sudo_list))}")
+        else:
+            message.reply("No sudoers in the list.")
